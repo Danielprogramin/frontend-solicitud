@@ -1,0 +1,58 @@
+<!-- src/app/features/candidatos/candidato-form/candidato-form.component.html -->
+<div class="container">
+  <h1>{{ isEditing ? 'Editar' : 'Nuevo' }} Candidato</h1>
+
+  <div *ngIf="loading" class="loading">Cargando...</div>
+
+  <form [formGroup]="candidatoForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" formControlName="nombre" class="form-control" [ngClass]="{'is-invalid': submitted && candidatoForm.get('nombre')?.errors}">
+      <div *ngIf="submitted && candidatoForm.get('nombre')?.errors?.['required']" class="invalid-feedback">
+        El nombre es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="apellido">Apellido</label>
+      <input type="text" id="apellido" formControlName="apellido" class="form-control" [ngClass]="{'is-invalid': submitted && candidatoForm.get('apellido')?.errors}">
+      <div *ngIf="submitted && candidatoForm.get('apellido')?.errors?.['required']" class="invalid-feedback">
+        El apellido es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="documento_identidad">Documento de Identidad</label>
+      <input type="text" id="documento_identidad" formControlName="documento_identidad" class="form-control" [ngClass]="{'is-invalid': submitted && candidatoForm.get('documento_identidad')?.errors}">
+      <div *ngIf="submitted && candidatoForm.get('documento_identidad')?.errors?.['required']" class="invalid-feedback">
+        El documento de identidad es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo Electrónico</label>
+      <input type="email" id="correo" formControlName="correo" class="form-control" [ngClass]="{'is-invalid': submitted && candidatoForm.get('correo')?.errors}">
+      <div *ngIf="submitted && candidatoForm.get('correo')?.errors?.['required']" class="invalid-feedback">
+        El correo electrónico es requerido
+      </div>
+      <div *ngIf="submitted && candidatoForm.get('correo')?.errors?.['email']" class="invalid-feedback">
+        Ingrese un correo electrónico válido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input type="text" id="telefono" formControlName="telefono" class="form-control" [ngClass]="{'is-invalid': submitted && candidatoForm.get('telefono')?.errors}">
+      <div *ngIf="submitted && candidatoForm.get('telefono')?.errors?.['required']" class="invalid-feedback">
+        El teléfono es requerido
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ loading ? 'Guardando...' : 'Guardar' }}
+      </button>
+      <button type="button" class="btn btn-secondary" [routerLink]="['/candidatos']">Cancelar</button>
+    </div>
+  </form>
+</div>

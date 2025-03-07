@@ -1,0 +1,40 @@
+<!-- src/app/features/candidatos/candidatos-list/candidatos-list.component.html -->
+<div class="container">
+  <div class="header-actions">
+    <h1>Gestión de Candidatos</h1>
+    <button class="btn btn-primary" [routerLink]="['/candidatos/nuevo']">Nuevo Candidato</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Cargando candidatos...</div>
+
+  <table *ngIf="!loading" class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Documento</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidato of candidatos">
+        <td>{{ candidato.id }}</td>
+        <td>{{ candidato.nombre }}</td>
+        <td>{{ candidato.apellido }}</td>
+        <td>{{ candidato.documento_identidad }}</td>
+        <td>{{ candidato.correo }}</td>
+        <td>{{ candidato.telefono }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" [routerLink]="['/candidatos/editar', candidato.id]">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteCandidato(candidato.id!)">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="candidatos.length === 0">
+        <td colspan="7" class="text-center">No hay candidatos registrados</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

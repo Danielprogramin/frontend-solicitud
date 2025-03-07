@@ -1,0 +1,20 @@
+
+<div class="container">
+  <div class="header-actions">
+    <h1>Gestión de Solicitudes</h1>
+    <button class="btn btn-primary" [routerLink]="['/solicitudes/nueva']">Nueva Solicitud</button>
+  </div>
+
+  <div class="filters-container" [formGroup]="filterForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" formControlName="estado" class="form-control">
+            <option value="">Todos</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="en_proceso">En Proceso</option>
+            <option value="completado">Completado</option>
+          </select>
+        </div>
+</div>

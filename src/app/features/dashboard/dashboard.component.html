@@ -1,0 +1,36 @@
+
+<div class="dashboard-container">
+  <h1>Dashboard</h1>
+
+  <div *ngIf="loading">Cargando datos...</div>
+
+  <div *ngIf="!loading" class="dashboard-cards">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Solicitudes Pendientes</h5>
+        <p class="card-text">{{ estadosCount.pendiente }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Solicitudes En Proceso</h5>
+        <p class="card-text">{{ estadosCount.en_proceso }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Solicitudes Completadas</h5>
+        <p class="card-text">{{ estadosCount.completado }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Total Solicitudes</h5>
+        <p class="card-text">{{ estadosCount.total }}</p>
+      </div>
+    </div>
+  </div>
+</div>
