@@ -1,4 +1,3 @@
-// src/app/core/services/solicitud.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
@@ -32,5 +31,19 @@ export class SolicitudService {
 
   changeStatus(id: number, estado: string): Observable<Solicitud> {
     return this.apiService.put<Solicitud>(`solicitudes/${id}/estado`, { estado });
+  }
+
+  /**
+   * Obtiene la lista de candidatos disponibles
+   */
+  getCandidatos(): Observable<any[]> {
+    return this.apiService.get<any[]>('candidatos');
+  }
+
+  /**
+   * Obtiene la lista de tipos de estudio disponibles
+   */
+  getTiposEstudio(): Observable<any[]> {
+    return this.apiService.get<any[]>('tipo-estudios');
   }
 }

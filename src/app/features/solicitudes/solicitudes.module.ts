@@ -8,14 +8,14 @@ import { CambiarEstadoComponent } from './cambiar-estado/cambiar-estado.componen
 
 @NgModule({
   declarations: [
-    SolicitudesListComponent // Solo componentes no standalone
+    SolicitudesListComponent ,
+    SolicitudFormComponent , 
+    CambiarEstadoComponent    
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SolicitudesRoutingModule,
-    SolicitudFormComponent,   // Importa componentes standalone
-    CambiarEstadoComponent    // Importa componentes standalone
   ]
 })
 export class SolicitudesModule { }

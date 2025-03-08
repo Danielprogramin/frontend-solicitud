@@ -11,10 +11,10 @@ export class TipoEstudioService {
   constructor(private apiService: ApiService) {}
 
   getAll(): Observable<TipoEstudio[]> {
-    return this.apiService.get<TipoEstudio[]>('tipos-estudio');
+    return this.apiService.get<TipoEstudio[]>('tipo-estudios');
   }
 
   getById(id: number): Observable<TipoEstudio> {
-    return this.apiService.get<TipoEstudio>(`tipos-estudio/${id}`);
+    return this.apiService.get<TipoEstudio>(`tipo-estudios/${id}`);
   }
 }

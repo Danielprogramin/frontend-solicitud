@@ -1,39 +1,39 @@
 <!-- src/app/features/candidatos/candidatos-list/candidatos-list.component.html -->
-<div class="container">
-  <div class="header-actions">
-    <h1>Gestión de Candidatos</h1>
-    <button class="btn btn-primary" [routerLink]="['/candidatos/nuevo']">Nuevo Candidato</button>
+<div class="container mx-auto p-4">
+  <div class="header-actions flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">Gestión de Candidatos</h1>
+    <button class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded" [routerLink]="['/candidatos/nuevo']">Nuevo Candidato</button>
   </div>
 
-  <div *ngIf="loading" class="loading">Cargando candidatos...</div>
+  <div *ngIf="loading" class="loading text-center text-gray-500">Cargando candidatos...</div>
 
-  <table *ngIf="!loading" class="table">
+  <table *ngIf="!loading" class="table-auto w-full bg-white shadow-md rounded">
     <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Documento</th>
-        <th>Correo</th>
-        <th>Teléfono</th>
-        <th>Acciones</th>
+      <tr class="bg-gray-200 text-left">
+        <th class="px-4 py-2">ID</th>
+        <th class="px-4 py-2">Nombre</th>
+        <th class="px-4 py-2">Apellido</th>
+        <th class="px-4 py-2">Documento</th>
+        <th class="px-4 py-2">Correo</th>
+        <th class="px-4 py-2">Teléfono</th>
+        <th class="px-4 py-2">Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let candidato of candidatos">
-        <td>{{ candidato.id }}</td>
-        <td>{{ candidato.nombre }}</td>
-        <td>{{ candidato.apellido }}</td>
-        <td>{{ candidato.documento_identidad }}</td>
-        <td>{{ candidato.correo }}</td>
-        <td>{{ candidato.telefono }}</td>
-        <td>
-          <button class="btn btn-sm btn-info" [routerLink]="['/candidatos/editar', candidato.id]">Editar</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteCandidato(candidato.id!)">Eliminar</button>
+      <tr *ngFor="let candidato of candidatos" class="border-b">
+        <td class="px-4 py-2">{{ candidato.id }}</td>
+        <td class="px-4 py-2">{{ candidato.nombre }}</td>
+        <td class="px-4 py-2">{{ candidato.apellido }}</td>
+        <td class="px-4 py-2">{{ candidato.documento_identidad }}</td>
+        <td class="px-4 py-2">{{ candidato.correo }}</td>
+        <td class="px-4 py-2">{{ candidato.telefono }}</td>
+        <td class="px-4 py-2">
+          <button class="btn btn-sm btn-info bg-blue-500 text-white px-2 py-1 rounded" [routerLink]="['/candidatos/editar', candidato.id]">Editar</button>
+          <button class="btn btn-sm btn-danger bg-red-500 text-white px-2 py-1 rounded" (click)="deleteCandidato(candidato.id!)">Eliminar</button>
         </td>
       </tr>
       <tr *ngIf="candidatos.length === 0">
-        <td colspan="7" class="text-center">No hay candidatos registrados</td>
+        <td colspan="7" class="text-center py-4 text-gray-500">No hay candidatos registrados</td>
       </tr>
     </tbody>
   </table>

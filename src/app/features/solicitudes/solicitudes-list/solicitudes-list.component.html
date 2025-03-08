@@ -1,20 +1,56 @@
-
-<div class="container">
-  <div class="header-actions">
-    <h1>Gestión de Solicitudes</h1>
-    <button class="btn btn-primary" [routerLink]="['/solicitudes/nueva']">Nueva Solicitud</button>
+<div class="container mx-auto p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">Gestión de Solicitudes</h1>
+    <button class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded" [routerLink]="['/solicitudes/nueva']">
+      Nueva Solicitud
+    </button>
   </div>
 
-  <div class="filters-container" [formGroup]="filterForm">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="estado">Estado</label>
-          <select id="estado" formControlName="estado" class="form-control">
-            <option value="">Todos</option>
-            <option value="pendiente">Pendiente</option>
-            <option value="en_proceso">En Proceso</option>
-            <option value="completado">Completado</option>
-          </select>
-        </div>
+  <div class="filters-container mb-4" [formGroup]="filterForm">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="form-group">
+        <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+        <select id="estado" formControlName="estado" class="form-control mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <option value="">Todos</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="en_proceso">En Proceso</option>
+          <option value="completado">Completado</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Candidato</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo de Estudio</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let solicitud of solicitudes">
+          <td class="px-6 py-4 whitespace-nowrap">{{ solicitud.id }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ solicitud.candidato?.nombre }}{{ solicitud.candidato?.apellido}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ solicitud.tipo_estudio?.nombre }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span [ngClass]="getEstadoClass(solicitud.estado)" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+              {{ solicitud.estado }}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <button class="btn btn-sm bg-blue-500 text-white px-2 py-1 rounded mr-2" (click)="solicitud.id !== undefined && updateEstado(solicitud.id)">
+              Actualizar Estado
+            </button>
+            <button class="btn btn-sm bg-red-500 text-white px-2 py-1 rounded" (click)="solicitud.id !== undefined && deleteSolicitud(solicitud.id)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,4 +1,3 @@
-// src/app/features/solicitudes/solicitudes-list/solicitudes-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Solicitud } from '../../../models/solicitud';
 import { SolicitudService } from '../../../core/services/solicitud.service';
@@ -41,18 +40,24 @@ export class SolicitudesListComponent implements OnInit {
     this.tipoEstudioService.getAll().subscribe({
       next: (data) => {
         this.tiposEstudio = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar tipos de estudio:', err);
       }
     });
   }
 
   loadSolicitudes(): void {
     this.loading = true;
-
-    const filters = {
-      estado: this.filterForm.value.estado || undefined,
-      tipo_estudio_id: this.filterForm.value.tipo_estudio_id || undefined
-    };
-
+  
+    const filters: any = {};
+    if (this.filterForm.value.estado) {
+      filters.estado = this.filterForm.value.estado;
+    }
+    if (this.filterForm.value.tipo_estudio_id) {
+      filters.tipo_estudio_id = this.filterForm.value.tipo_estudio_id;
+    }
+  
     this.solicitudService.getAll(filters).subscribe({
       next: (data) => {
         this.solicitudes = data;
@@ -78,12 +83,30 @@ export class SolicitudesListComponent implements OnInit {
     }
   }
 
+  updateEstado(id: number): void {
+    const nuevoEstado = prompt('Ingrese el nuevo estado (pendiente, en_proceso, completado):');
+    if (nuevoEstado) {
+      this.solicitudService.changeStatus(id, nuevoEstado).subscribe({
+        next: () => {
+          this.loadSolicitudes();
+        },
+        error: (err) => {
+          console.error('Error al actualizar estado:', err);
+        }
+      });
+    }
+  }
+
   getEstadoClass(estado: string): string {
     switch (estado) {
-      case 'pendiente': return 'badge-warning';
-      case 'en_proceso': return 'badge-primary';
-      case 'completado': return 'badge-success';
-      default: return '';
+      case 'pendiente':
+        return 'bg-yellow-200 text-yellow-800';
+      case 'en_proceso':
+        return 'bg-blue-200 text-blue-800';
+      case 'completado':
+        return 'bg-green-200 text-green-800';
+      default:
+        return 'bg-gray-200 text-gray-800';
     }
   }
 }

@@ -1,27 +1,27 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
   <!-- Campo Email -->
-  <div class="form-group">
-    <label>Correo electrónico</label>
+  <div class="form-group mb-4">
+    <label class="block text-gray-700 font-bold mb-2">Correo electrónico</label>
     <input
       type="email"
       formControlName="email"
-      [class.is-invalid]="email?.invalid && (email?.dirty || email?.touched)"
+      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline [class.is-invalid]='email?.invalid && (email?.dirty || email?.touched)'"
     >
-    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message">
+    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message text-red-500 text-xs italic mt-2">
       <div *ngIf="email?.errors?.['required']">El correo es requerido</div>
       <div *ngIf="email?.errors?.['email']">Formato de correo inválido</div>
     </div>
   </div>
 
   <!-- Campo Contraseña -->
-  <div class="form-group">
-    <label>Contraseña</label>
+  <div class="form-group mb-4">
+    <label class="block text-gray-700 font-bold mb-2">Contraseña</label>
     <input
       type="password"
       formControlName="password"
-      [class.is-invalid]="password?.invalid && (password?.dirty || password?.touched)"
+      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline [class.is-invalid]='password?.invalid && (password?.dirty || password?.touched)'"
     >
-    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-message">
+    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-message text-red-500 text-xs italic mt-2">
       La contraseña es requerida
     </div>
   </div>
@@ -29,7 +29,7 @@
   <!-- Botón de Submit -->
   <button
     type="submit"
-    class="btn btn-primary"
+    class="btn btn-primary w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     [disabled]="loginForm.invalid || loading"
   >
     <span *ngIf="!loading">Ingresar</span>
@@ -37,7 +37,8 @@
   </button>
 
   <!-- Mensaje de error general -->
-  <div *ngIf="error" class="alert alert-danger mt-3">
+  <div *ngIf="error" class="alert alert-danger mt-3 text-red-500 text-xs italic">
     {{ error }}
   </div>
+  
 </form>

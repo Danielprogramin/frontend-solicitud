@@ -1,1 +1,34 @@
-<p>solicitud-form works!</p>
+<div class="container">
+    <h2>Crear Nueva Solicitud</h2>
+  
+    <form [formGroup]="solicitudForm" (ngSubmit)="enviarSolicitud()">
+      <!-- Seleccionar Candidato -->
+      <div class="form-group">
+        <label for="candidato">Seleccionar Candidato</label>
+        <select id="candidato" class="form-control" formControlName="candidato_id">
+          <option *ngFor="let candidato of candidatos" [value]="candidato.id">
+            {{ candidato.nombre }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Seleccionar Tipo de Estudio -->
+      <div class="form-group">
+        <label for="tipoEstudio">Seleccionar Tipo de Estudio</label>
+        <select id="tipoEstudio" class="form-control" formControlName="tipo_estudio_id">
+          <option *ngFor="let tipo of tiposEstudio" [value]="tipo.id">
+            {{ tipo.nombre }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Botón de Envío -->
+      <button type="submit" class="btn btn-primary" [disabled]="solicitudForm.invalid">
+        Crear Solicitud
+      </button>
+    </form>
+  
+    <!-- Mensajes de éxito/error -->
+    <p *ngIf="mensaje" class="alert alert-info">{{ mensaje }}</p>
+  </div>
+  
