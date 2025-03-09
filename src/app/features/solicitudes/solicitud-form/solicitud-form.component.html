@@ -1,34 +1,48 @@
-<div class="container">
-    <h2>Crear Nueva Solicitud</h2>
-  
-    <form [formGroup]="solicitudForm" (ngSubmit)="enviarSolicitud()">
+<div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
+    
+    <!-- Encabezado -->
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">📄 Crear Nueva Solicitud</h2>
+    
+    <!-- Formulario -->
+    <form [formGroup]="solicitudForm" (ngSubmit)="enviarSolicitud()" class="space-y-5">
+      
       <!-- Seleccionar Candidato -->
-      <div class="form-group">
-        <label for="candidato">Seleccionar Candidato</label>
-        <select id="candidato" class="form-control" formControlName="candidato_id">
+      <div>
+        <label for="candidato" class="block text-sm font-medium text-gray-700 mb-1">Seleccionar Candidato</label>
+        <select id="candidato" formControlName="candidato_id"
+                class="w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           <option *ngFor="let candidato of candidatos" [value]="candidato.id">
             {{ candidato.nombre }}
           </option>
         </select>
       </div>
-  
+
       <!-- Seleccionar Tipo de Estudio -->
-      <div class="form-group">
-        <label for="tipoEstudio">Seleccionar Tipo de Estudio</label>
-        <select id="tipoEstudio" class="form-control" formControlName="tipo_estudio_id">
+      <div>
+        <label for="tipoEstudio" class="block text-sm font-medium text-gray-700 mb-1">Seleccionar Tipo de Estudio</label>
+        <select id="tipoEstudio" formControlName="tipo_estudio_id"
+                class="w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           <option *ngFor="let tipo of tiposEstudio" [value]="tipo.id">
             {{ tipo.nombre }}
           </option>
         </select>
       </div>
-  
+
       <!-- Botón de Envío -->
-      <button type="submit" class="btn btn-primary" [disabled]="solicitudForm.invalid">
-        Crear Solicitud
+      <button type="submit" [disabled]="solicitudForm.invalid"
+              class="w-full py-2 px-4 font-medium text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition disabled:bg-gray-300 disabled:cursor-not-allowed">
+        🚀 Crear Solicitud
       </button>
+
     </form>
-  
+
     <!-- Mensajes de éxito/error -->
-    <p *ngIf="mensaje" class="alert alert-info">{{ mensaje }}</p>
+    <p *ngIf="mensaje"
+       class="mt-4 text-center text-sm font-medium py-2 px-3 rounded-md"
+       [ngClass]="mensaje.includes('éxito') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'">
+      {{ mensaje }}
+    </p>
+
   </div>
-  
+</div>

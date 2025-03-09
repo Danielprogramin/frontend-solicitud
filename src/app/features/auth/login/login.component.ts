@@ -48,7 +48,7 @@ export class LoginComponent implements OnDestroy {
   }
 
   private handleError(error: any): void {
-    console.error('Error completo:', error); // Para depuración
+    console.error('Error completo:', error); 
 
     if (error.status === 0) {
       this.error = 'No hay conexión con el servidor';

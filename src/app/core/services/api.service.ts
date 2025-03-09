@@ -16,7 +16,7 @@ export class ApiService {
       'Content-Type': 'application/json'
     });
 
-    // Asegurar que localStorage está disponible antes de usarlo
+    // Verificar si localStorage está disponible antes de usarlo
     if (typeof window !== 'undefined' && window.localStorage) {
       const token = localStorage.getItem('token');
       if (token) {
@@ -30,25 +30,29 @@ export class ApiService {
   get<T>(path: string, params: any = {}): Observable<T> {
     return this.http.get<T>(`${this.apiUrl}/${path}`, {
       headers: this.getHeaders(),
-      params
+      params,
+      withCredentials: true // Importante para Laravel Sanctum
     });
   }
 
   post<T>(path: string, body: any = {}): Observable<T> {
     return this.http.post<T>(`${this.apiUrl}/${path}`, body, {
-      headers: this.getHeaders()
+      headers: this.getHeaders(),
+      withCredentials: true
     });
   }
 
   put<T>(path: string, body: any = {}): Observable<T> {
     return this.http.put<T>(`${this.apiUrl}/${path}`, body, {
-      headers: this.getHeaders()
+      headers: this.getHeaders(),
+      withCredentials: true
     });
   }
 
   delete<T>(path: string): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}/${path}`, {
-      headers: this.getHeaders()
+      headers: this.getHeaders(),
+      withCredentials: true
     });
   }
 }

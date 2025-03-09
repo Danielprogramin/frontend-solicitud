@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SolicitudesListComponent implements OnInit {
   solicitudes: Solicitud[] = [];
   tiposEstudio: TipoEstudio[] = [];
+  solicitudSeleccionada: number | null = null;
   loading = true;
   filterForm: FormGroup;
 
@@ -49,7 +50,7 @@ export class SolicitudesListComponent implements OnInit {
 
   loadSolicitudes(): void {
     this.loading = true;
-  
+
     const filters: any = {};
     if (this.filterForm.value.estado) {
       filters.estado = this.filterForm.value.estado;
@@ -57,7 +58,7 @@ export class SolicitudesListComponent implements OnInit {
     if (this.filterForm.value.tipo_estudio_id) {
       filters.tipo_estudio_id = this.filterForm.value.tipo_estudio_id;
     }
-  
+
     this.solicitudService.getAll(filters).subscribe({
       next: (data) => {
         this.solicitudes = data;
@@ -70,31 +71,13 @@ export class SolicitudesListComponent implements OnInit {
     });
   }
 
-  deleteSolicitud(id: number): void {
-    if (confirm('¿Está seguro de eliminar esta solicitud?')) {
-      this.solicitudService.delete(id).subscribe({
-        next: () => {
-          this.loadSolicitudes();
-        },
-        error: (err) => {
-          console.error('Error al eliminar solicitud:', err);
-        }
-      });
-    }
+
+  seleccionarSolicitud(id: number): void {
+    this.solicitudSeleccionada = id;
   }
 
-  updateEstado(id: number): void {
-    const nuevoEstado = prompt('Ingrese el nuevo estado (pendiente, en_proceso, completado):');
-    if (nuevoEstado) {
-      this.solicitudService.changeStatus(id, nuevoEstado).subscribe({
-        next: () => {
-          this.loadSolicitudes();
-        },
-        error: (err) => {
-          console.error('Error al actualizar estado:', err);
-        }
-      });
-    }
+  cerrarModal(): void {
+    this.solicitudSeleccionada = null;
   }
 
   getEstadoClass(estado: string): string {

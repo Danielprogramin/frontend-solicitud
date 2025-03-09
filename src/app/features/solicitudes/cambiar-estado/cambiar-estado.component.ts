@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SolicitudService } from '../../../core/services/solicitud.service';
 
@@ -8,8 +8,9 @@ import { SolicitudService } from '../../../core/services/solicitud.service';
   styleUrls: ['./cambiar-estado.component.css']
 })
 export class CambiarEstadoComponent {
-  solicitudId!: number;
-  estadoActualizado = new EventEmitter<void>();
+  @Input() solicitudId!: number;
+  @Output() estadoActualizado = new EventEmitter<void>();
+
   estadoForm: FormGroup;
 
   constructor(private fb: FormBuilder, private solicitudService: SolicitudService) {
@@ -25,8 +26,7 @@ export class CambiarEstadoComponent {
 
     this.solicitudService.changeStatus(this.solicitudId, nuevoEstado).subscribe({
       next: () => {
-        alert('Estado actualizado con éxito');
-        this.estadoActualizado.emit();
+        this.estadoActualizado.emit(); 
       },
       error: (err) => {
         console.error('Error al actualizar estado:', err);

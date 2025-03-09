@@ -1,44 +1,73 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-  <!-- Campo Email -->
-  <div class="form-group mb-4">
-    <label class="block text-gray-700 font-bold mb-2">Correo electrónico</label>
-    <input
-      type="email"
-      formControlName="email"
-      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline [class.is-invalid]='email?.invalid && (email?.dirty || email?.touched)'"
-    >
-    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message text-red-500 text-xs italic mt-2">
-      <div *ngIf="email?.errors?.['required']">El correo es requerido</div>
-      <div *ngIf="email?.errors?.['email']">Formato de correo inválido</div>
-    </div>
-  </div>
-
-  <!-- Campo Contraseña -->
-  <div class="form-group mb-4">
-    <label class="block text-gray-700 font-bold mb-2">Contraseña</label>
-    <input
-      type="password"
-      formControlName="password"
-      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline [class.is-invalid]='password?.invalid && (password?.dirty || password?.touched)'"
-    >
-    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error-message text-red-500 text-xs italic mt-2">
-      La contraseña es requerida
-    </div>
-  </div>
-
-  <!-- Botón de Submit -->
-  <button
-    type="submit"
-    class="btn btn-primary w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-    [disabled]="loginForm.invalid || loading"
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="w-full max-w-sm bg-white shadow-lg rounded-lg p-8"
   >
-    <span *ngIf="!loading">Ingresar</span>
-    <span *ngIf="loading">Cargando...</span>
-  </button>
+    <!-- Título -->
+    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">
+      🔐 Iniciar Sesión
+    </h2>
 
-  <!-- Mensaje de error general -->
-  <div *ngIf="error" class="alert alert-danger mt-3 text-red-500 text-xs italic">
-    {{ error }}
-  </div>
-  
-</form>
+    <!-- Campo Email -->
+    <div class="mb-4">
+      <label for="email" class="label-style">Correo Electrónico</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        [ngClass]="{
+          'border-red-500': email?.invalid && (email?.dirty || email?.touched)
+        }"
+      />
+      <p
+        *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+        class="error-message"
+      >
+        <span *ngIf="email?.errors?.['required']"
+          >⚠️ El correo es requerido</span
+        >
+        <span *ngIf="email?.errors?.['email']"
+          >⚠️ Formato de correo inválido</span
+        >
+      </p>
+    </div>
+
+    <!-- Campo Contraseña -->
+    <div class="mb-4">
+      <label for="password" class="label-style">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        [ngClass]="{
+          'border-red-500':
+            password?.invalid && (password?.dirty || password?.touched)
+        }"
+      />
+      <p
+        *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+        class="error-message"
+      >
+        ⚠️ La contraseña es requerida
+      </p>
+    </div>
+
+    <!-- Botón de Ingreso -->
+    <button
+      type="submit"
+      class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 disabled:opacity-50"
+      [disabled]="loginForm.invalid || loading"
+    >
+      <span *ngIf="!loading">🚀 Ingresar</span>
+      <span *ngIf="loading">⏳ Cargando...</span>
+    </button>
+
+    <!-- Mensaje de error general -->
+    <p *ngIf="error" class="text-center text-red-500 text-xs mt-3">
+      ❌ {{ error }}
+    </p>
+  </form>
+</div>
