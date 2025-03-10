@@ -1,12 +1,11 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
-  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
-    
+<div class="container mx-auto max-w-lg bg-white shadow-md rounded-lg p-6 mt-10">
+
     <!-- Encabezado -->
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">📄 Crear Nueva Solicitud</h2>
-    
+
     <!-- Formulario -->
     <form [formGroup]="solicitudForm" (ngSubmit)="enviarSolicitud()" class="space-y-5">
-      
+
       <!-- Seleccionar Candidato -->
       <div>
         <label for="candidato" class="block text-sm font-medium text-gray-700 mb-1">Seleccionar Candidato</label>
@@ -44,5 +43,4 @@
       {{ mensaje }}
     </p>
 
-  </div>
 </div>
