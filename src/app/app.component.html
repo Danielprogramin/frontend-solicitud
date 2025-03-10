@@ -1,4 +1,8 @@
+<div class="flex h-screen" *ngIf="isAuthenticated">
+  <app-sidebar></app-sidebar>
+  <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+    <router-outlet></router-outlet>
+  </main>
+</div>
 
-<main class="main">
-</main>
-<router-outlet />
+<router-outlet *ngIf="!isAuthenticated"></router-outlet>

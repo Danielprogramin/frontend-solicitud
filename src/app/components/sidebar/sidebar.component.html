@@ -1,20 +1,27 @@
-<nav class="sidebar">
-    <ul>
-      <li>
-        <a routerLink="/dashboard" routerLinkActive="active">
-          📊 Dashboard
-        </a>
-      </li>
-      <li>
-        <a routerLink="/candidatos" routerLinkActive="active">
-          👤 Candidatos
-        </a>
-      </li>
-      <li>
-        <a routerLink="/solicitudes" routerLinkActive="active">
-          📑 Solicitudes
-        </a>
-      </li>
-    </ul>
-  </nav>
-  
+<nav class="bg-white-900 text-black w-64 h-screen p-4 shadow-lg">
+  <ul class="mt-6 space-y-2">
+    <li class="px-6 py-3 rounded-lg hover:bg-gray-300 transition-all cursor-pointer"
+        routerLink="/dashboard"
+        routerLinkActive="bg-gray-300 font-semibold">
+      📊 Dashboard
+    </li>
+    <li class="px-6 py-3 rounded-lg hover:bg-gray-300 transition-all cursor-pointer"
+        routerLink="/candidatos"
+        routerLinkActive="bg-gray-300 font-semibold">
+      👤 Candidatos
+    </li>
+    <li class="px-6 py-3 rounded-lg hover:bg-gray-300 transition-all cursor-pointer"
+        routerLink="/solicitudes"
+        routerLinkActive="bg-gray-300 font-semibold">
+      📄 Solicitudes
+    </li>
+
+    <!-- Separador -->
+    <li class="border-t border-gray-300 mt-16"></li>
+
+    <li class="px-6 py-3 rounded-lg hover:bg-red-600 transition-all cursor-pointer text-red-400 hover:text-white"
+        (click)="logout()">
+      🚪 Cerrar Sesión
+    </li>
+  </ul>
+</nav>
